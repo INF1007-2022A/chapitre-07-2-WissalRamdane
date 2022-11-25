@@ -48,7 +48,7 @@ def fibonacci_numbers(length):
 			last_element.popleft()
 			yield fibonacci_number
 
-def build_recursive_sequence_generator(initial_numbers,recursive_def,keep_whole_sequence):
+def build_recursive_sequence_generator(initial_numbers,recursive_def,keep_whole_sequence=False):
 	def recursive_generator(length):
 		# On génère les valeurs initiales en premier (comme pour Fibonacci)
 		for elem in initial_numbers[0:length]:
@@ -107,9 +107,9 @@ if __name__ == "__main__":
 		print(fi, end=" ")
 	print("\n")
 
-	lucas = build_recursive_sequence_generator(TODO)
+	lucas = build_recursive_sequence_generator([2,1],lambda seq:seq[-1]+seq[-2])
 	print(f"Lucas : {[elem for elem in lucas(10)]}")
-	perrin = build_recursive_sequence_generator(TODO)
+	perrin = build_recursive_sequence_generator([3,0,2],lambda seq:seq[-2]+seq[-3])
 	print(f"Perrin : {[elem for elem in perrin(10)]}")
-	hofstadter_q = build_recursive_sequence_generator(TODO)
+	hofstadter_q = build_recursive_sequence_generator([1,1], lambda seq: [seq[-seq[-1]]]+[seq[-seq[-2]]])
 	print(f"Hofstadter-Q : {[elem for elem in hofstadter_q(10)]}")
