@@ -40,7 +40,7 @@ def fibonacci_numbers(length):
 
 	last_element=deque(initial_values)
 	else:
-		if length>len(initial_numbers):
+		if length>len(initial_numbers):  #est ce que c'est correct de mettre cette ligne
 
 		for i in range(len(initial_numbers),length):
 			fibonacci_number=last_element[-1]+last_element[-2]
