@@ -4,20 +4,70 @@
 from collections import deque
 
 
-def get_fibonacci_number(TODO):
-	pass
+def get_fibonacci_number(index):
+	# if index==0:
+	# 	return 0
+	# else:
+	# 	if index==1:
+	# 		return 1
+	# else:
+	# 	return get_fibonacci_number(index-1)+get_fibonacci_number(index-2)
 
-def get_fibonacci_sequence(TODO):
-	pass
 
-def get_sorted_dict_by_decimals(TODO):
-	pass
+	return 0 if index==0 else 1 if index==1 else get_fibonacci_number(index-1)+get_fibonacci_number(index-2)
+
+def get_fibonacci_sequence(length,seq=[0,1]):
+
+	# if length==1:
+	# 	return seq[0:1]
+	# else:
+	# 	if length==2:
+	# 		return seq[0:2]
+	# else:
+	# 	if len(seq)<length:
+	# 		return get_fibonacci_sequence(length,seq+[seq[-1]+seq[-2]])
+
+	return (seq[0:1] if length==1 else seq[0:2] if length==2 else get_fibonacci_sequence(length,seq+[seq[-1]+seq[-2]]) if len(seq)<length)
+def get_sorted_dict_by_decimals(dict_arg):
+	return dict(sorted(dict_arg.items(),key=lambda t:t[1] % 1.0))
 
 def fibonacci_numbers(length):
-	pass
+	initial_numbers=[0,1]
+	yield initial_numbers[0]
 
-def build_recursive_sequence_generator(TODO):
-	pass
+	if length==2:
+		yield initial_numbers[1]
+
+	last_element=deque(initial_values)
+	else:
+		if length>len(initial_numbers):
+
+		for i in range(len(initial_numbers),length):
+			fibonacci_number=last_element[-1]+last_element[-2]
+			last_element.append(fibonacci_number)
+			last_element.popleft()
+			yield fibonacci_number
+
+def build_recursive_sequence_generator(initial_numbers,recursive_def,keep_whole_sequence):
+	def recursive_generator(length):
+		# On génère les valeurs initiales en premier (comme pour Fibonacci)
+		for elem in initial_numbers[0:length]:
+			yield elem
+		# On crée une file sous forme de deque qui contient au départ les valeurs initiales
+		last_elems = deque(initial_numbers)
+		# Pour chaque valeur définie récursivement demandée :
+		for i in range(len(initial_numbers), length):
+			# On applique la définition récursive qui est la fonction passée en paramètre pour obtenir l'élément courant
+			current_element = recursive_def(last_elems)
+			# On ajoute à la file (entrée de la pile = fin de la deque)
+			last_elems.append(current_element)
+			# Si on ne veut pas garder toute la séquence, on enlève l'élément le plus vieux soit le premier element qui apparaît
+			if not keep_whole_sequence:
+				last_elems.popleft()
+			# On génére l'élément courant
+			yield current_element
+	# On retourne la fermeture lexicale qui est un objet générateur.
+	return recursive_generator
 
 
 if __name__ == "__main__":
